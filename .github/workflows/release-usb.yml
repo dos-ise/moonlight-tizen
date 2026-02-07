@@ -2,8 +2,9 @@
 name: Release (USB)
 # Configure this workflow to be triggered automatically on the 15th of each month at 12:00 PM UTC for generating USB package releases.
 on:
-  schedule:
-    - cron: '0 12 15 * *'
+  # schedule:
+  #   - cron: '0 12 15 * *'
+  workflow_dispatch:
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
   REGISTRY: ghcr.io
