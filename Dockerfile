@@ -61,7 +61,7 @@ RUN echo "source /home/moonlight/emscripten-release-bundle/emsdk/emsdk_env.sh" >
 WORKDIR /home/moonlight
 COPY --chown=moonlight . ./moonlight-tizen
 RUN cmake \
-	-DCMAKE_TOOLCHAIN_FILE=/home/moonlight/emscripten-release-bundle/emsdk/fastcomp/emscripten/cmake/Modules/Platform/Emscripten.cmake \
+    -DCMAKE_TOOLCHAIN_FILE=/home/moonlight/emscripten-release-bundle/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake \
 	-G Ninja \
 	-S moonlight-tizen \
 	-B build
@@ -89,21 +89,17 @@ RUN mv build/widget/Moonlight.wgt .
 
 # Clean up unnecessary files to reduce image size
 RUN rm -rf \
-	build \
-	moonlight-tizen \
-	web-cli_Tizen_Studio_6.1_ubuntu-64.bin \
-	tizen-package-expect.sh \
-	.package-manager \
-	emscripten-1.39.4.7-linux64.zip \
-	emscripten-release-bundle \
-	.emscripten \
-	.emscripten_cache \
-	.emscripten_cache.lock \
-	.emscripten_ports \
-	.emscripten_sanity \
-	# .npm \
-	# wgt-to-usb \
-	.wget-hsts
+    build \
+    moonlight-tizen \
+    web-cli_Tizen_Studio_6.1_ubuntu-64.bin \
+    tizen-package-expect.sh \
+    .package-manager \
+    emscripten-release-bundle \
+    .emscripten_cache \
+    .emscripten_cache.lock \
+    .emscripten_ports \
+    .emscripten_sanity \
+    .wget-hsts
 
 # Use a multi-stage build to reclaim space from deleted files
 FROM ubuntu:22.04
