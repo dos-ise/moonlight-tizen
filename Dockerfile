@@ -49,11 +49,12 @@ RUN sed -i 's|/home/moonlight/tizen-studio-data/keystore/author/Moonlight.pwd||'
 RUN sed -i 's|/home/moonlight/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|' /home/moonlight/tizen-studio-data/profile/profiles.xml
 
 # Install Emscripten SDK
-RUN git clone https://github.com/emscripten-core/emsdk.git /opt/emsdk
-WORKDIR /opt/emsdk
+RUN mkdir -p emscripten-release-bundle
+RUN git clone https://github.com/emscripten-core/emsdk.git emscripten-release-bundle/emsdk
+WORKDIR /home/moonlight/emscripten-release-bundle/emsdk
 RUN ./emsdk install latest
 RUN ./emsdk activate latest
-RUN echo "source /opt/emsdk/emsdk_env.sh" >> /etc/bash.bashrc
+RUN echo "source /home/moonlight/emscripten-release-bundle/emsdk/emsdk_env.sh" >> /home/moonlight/.bashrc
 
 # Compile the source code and prepare the widget directory
 WORKDIR /home/moonlight
