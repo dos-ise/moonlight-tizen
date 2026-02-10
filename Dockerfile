@@ -48,12 +48,12 @@ RUN tizen security-profiles add \
 RUN sed -i 's|/home/moonlight/tizen-studio-data/keystore/author/Moonlight.pwd||' /home/moonlight/tizen-studio-data/profile/profiles.xml
 RUN sed -i 's|/home/moonlight/tizen-studio-data/tools/certificate-generator/certificates/distributor/tizen-distributor-signer.pwd|tizenpkcs12passfordsigner|' /home/moonlight/tizen-studio-data/profile/profiles.xml
 
-# Install Samsung Emscripten SDK and configure Java path for closure compiler
-RUN wget -nv -O emscripten-1.39.4.7-linux64.zip 'https://developer.samsung.com/smarttv/file/a5013a65-af11-4b59-844f-2d34f14d19a9'
-RUN unzip emscripten-1.39.4.7-linux64.zip
-WORKDIR emscripten-release-bundle/emsdk
-RUN ./emsdk activate latest-fastcomp
-RUN echo 'JAVA = "/usr/bin/java"' >> /home/moonlight/.emscripten
+# Install Emscripten SDK
+RUN git clone https://github.com/emscripten-core/emsdk.git /opt/emsdk
+WORKDIR /opt/emsdk
+RUN ./emsdk install latest
+RUN ./emsdk activate latest
+RUN echo "source /opt/emsdk/emsdk_env.sh" >> /etc/bash.bashrc
 
 # Compile the source code and prepare the widget directory
 WORKDIR /home/moonlight
