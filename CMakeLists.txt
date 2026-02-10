@@ -58,7 +58,8 @@ target_compile_definitions(moonlight-common-c PUBLIC
 target_include_directories(moonlight-common-c PUBLIC
     moonlight-common-c/src
     moonlight-common-c/enet/include
-    moonlight-common-c/reedsolomon)
+    moonlight-common-c/reedsolomon
+    ports/include/openssl)
 target_compile_features(moonlight-common-c PUBLIC c_std_99)
 set_target_properties(moonlight-common-c
     PROPERTIES
