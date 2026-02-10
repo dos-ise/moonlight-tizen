@@ -76,7 +76,7 @@ target_include_directories(libgamestream PUBLIC
 set_target_properties(libgamestream
     PROPERTIES
         COMPILE_FLAGS
-            "-sUSE_CURL=1")
+            "")
 
 add_library(h264bitstream STATIC
     h264bitstream/h264_nal.c
@@ -258,7 +258,7 @@ target_include_directories(moonlight-wasm PUBLIC
 set_target_properties(moonlight-wasm
     PROPERTIES
         COMPILE_FLAGS
-            "-sUSE_CURL=1")
+            "")
 target_compile_features(moonlight-wasm PUBLIC cxx_std_17)
 set_target_properties(moonlight-wasm
     PROPERTIES
@@ -274,9 +274,7 @@ set_target_properties(moonlight-wasm
              -s PTHREAD_POOL_SIZE=20 \
              -s WASM=1 \
              -s ENVIRONMENT_MAY_BE_TIZEN \
-             -s USE_CRYPTO=1 \
-             -s USE_SSL=1 \
-             -s USE_CURL=1")
+             -s USE_CRYPTO=1")
 target_link_libraries(moonlight-wasm PUBLIC
     libgamestream
     h264bitstream
