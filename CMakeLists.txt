@@ -58,12 +58,13 @@ target_compile_definitions(moonlight-common-c PUBLIC
 target_include_directories(moonlight-common-c PUBLIC
     moonlight-common-c/src
     moonlight-common-c/enet/include
-    moonlight-common-c/reedsolomon)
+    moonlight-common-c/reedsolomon
+    ports/include)
 target_compile_features(moonlight-common-c PUBLIC c_std_99)
 set_target_properties(moonlight-common-c
     PROPERTIES
         COMPILE_FLAGS
-            "-s USE_CRYPTO=1 -s USE_SSL=1")
+            "")
 
 add_library(libgamestream STATIC
     libgamestream/http.c
@@ -75,7 +76,7 @@ target_include_directories(libgamestream PUBLIC
 set_target_properties(libgamestream
     PROPERTIES
         COMPILE_FLAGS
-            "-s USE_CRYPTO=1 -s USE_SSL=1 -s USE_CURL=1")
+            "")
 
 add_library(h264bitstream STATIC
     h264bitstream/h264_nal.c
@@ -257,7 +258,7 @@ target_include_directories(moonlight-wasm PUBLIC
 set_target_properties(moonlight-wasm
     PROPERTIES
         COMPILE_FLAGS
-            "-s USE_CRYPTO=1 -s USE_SSL=1 -s USE_CURL=1")
+            "")
 target_compile_features(moonlight-wasm PUBLIC cxx_std_17)
 set_target_properties(moonlight-wasm
     PROPERTIES
@@ -273,9 +274,7 @@ set_target_properties(moonlight-wasm
              -s PTHREAD_POOL_SIZE=20 \
              -s WASM=1 \
              -s ENVIRONMENT_MAY_BE_TIZEN \
-             -s USE_CRYPTO=1 \
-             -s USE_SSL=1 \
-             -s USE_CURL=1")
+             -s USE_CRYPTO=1")
 target_link_libraries(moonlight-wasm PUBLIC
     libgamestream
     h264bitstream
